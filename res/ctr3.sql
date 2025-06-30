@@ -1,0 +1,1 @@
+create table public.movie_country_name (movie_id integer not null, country_name text null) 
