@@ -1,19 +1,23 @@
 # Film Analysis
 
-This project has as a goal to find trends and data points based on a public database of over 1 million films
+This project has as a goal to find trends, data points and perform data analysis based on a public database consisting of the metadata of roughly 1 million movies, including things like ratings, box-office numbers, release dates and more.
 
 ## Requirements
-
-Download the [database](https://www.kaggle.com/datasets/alanvourch/tmdb-movies-daily-updates)
-
-A RDBMS for quering
+- [Python](https://www.python.org/)
+- [PyPI](https://pypi.org/)
+- A RDBMS for running queries
 
 ## Installation
-
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the required packages.
-
-```bash
-pip install pandas numpy os json
-```
+1. Download the [dataset](https://www.kaggle.com/datasets/alanvourch/tmdb-movies-daily-updates)
+2. Clone this repository
+   ```bash
+   git clone https://github.com/1haut/Filmanalyse.git
+   ```
+3. Install packages
+  ```bash
+  pip install pandas numpy os json requests
+  ```
 
 ## Usage
+
+
