@@ -6,7 +6,6 @@ This project has as a goal to find trends, data points and perform data analysis
 - [Python](https://www.python.org/)
 - [PyPI](https://pypi.org/)
 - A [TMDB](https://developer.themoviedb.org/reference/intro/getting-started) API-key
-- A RDBMS for running queries
 
 ## Installation
 1. Download the [The Ultimate 1Million Movies Dataset (TMDB + IMDb)](https://www.kaggle.com/datasets/alanvourch/tmdb-movies-daily-updates)
