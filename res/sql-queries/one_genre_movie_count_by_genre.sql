@@ -5,7 +5,6 @@ WITH one_genre_mid AS (
 	JOIN genres ON genres.id=movie_genre.genre_id
 	GROUP BY movies.id, movies.title
 	HAVING COUNT(genres.genre) = 1
-	ORDER BY movies.id
 )
 
 SELECT genres.genre, COUNT(genres.genre) number_movies

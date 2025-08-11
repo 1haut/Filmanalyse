@@ -178,6 +178,9 @@ pyrightconfig.json
 # Personal
 snt/
 hidden/
+ger/
 no.py
 res/TMDB_all_movies_full.csv
 kbtond*
+*.txt
+test.py

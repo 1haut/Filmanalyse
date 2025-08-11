@@ -1,29 +1,17 @@
 import os
-import json
 import requests
 import numpy as np
 import pandas as pd
-# from database import supabase
 from dotenv import load_dotenv
-from admin_connection import supabase
 
 load_dotenv()
 
-# Access auth admin api
-admin_auth_client = supabase.auth.admin
-
 # TMDB access token auth
 tmdb_auth = os.getenv("TMDB_TOKEN")
-
 headers = {
     "accept": "application/json",
     "Authorization": f"Bearer {tmdb_auth}"
 }
-
-def requests_json(url):
-    res = requests.get(url, headers=headers)
-    return res.json()
-
 
 url_countries = "https://api.themoviedb.org/3/configuration/countries?language=en-US"
 url_languages = "https://api.themoviedb.org/3/configuration/languages"
@@ -32,6 +20,7 @@ url_genres = "https://api.themoviedb.org/3/genre/movie/list?language=en"
 countries_tmdb = requests.get(url_countries, headers=headers).json()
 languages_tmdb = requests.get(url_languages, headers=headers).json()
 genres_tmdb = requests.get(url_genres, headers=headers).json()
+
 
 # Transform data from TMDB
 transformed_countries = []
@@ -50,7 +39,7 @@ for element in genres_tmdb:
     transformed_genres.append({"genre": f"{element["name"]}"})
     
 
-# Insert data to database    
-supabase.table("countries").insert(transformed_countries).execute()
-supabase.table("languages").insert(transformed_languages).execute()
-supabase.table("genres").insert(transformed_genres).execute()
+# Convert transformed lists to csv 
+pd.DataFrame(transformed_countries).to_csv('countries.csv', index=False)
+pd.DataFrame(transformed_languages).to_csv('languages.csv', index=False)
+pd.DataFrame(transformed_genres).to_csv('genres.csv', index=False)
