@@ -26,7 +26,7 @@ def transform(tmdb_url):
             transformed.append({  "abbreviation": f"{element["iso_3166_1"]}" ,
                                     "name": f"{element["english_name"]}"})
             
-            
+        # Languages
         if "languages" in tmdb_url:
             transformed.append({  "abbreviation": f"{element["iso_3166_1"]}" ,
                                     "name": f"{element["english_name"]}"})
