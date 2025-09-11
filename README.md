@@ -9,11 +9,12 @@ This project has as a goal to find trends, data points and perform data analysis
 
 ## Installation
 1. Download the [The Ultimate 1Million Movies Dataset (TMDB + IMDb)](https://www.kaggle.com/datasets/alanvourch/tmdb-movies-daily-updates)
-2. Clone this repository
+2. Sign up on TMDB and obtain an API-key.
+3. Clone this repository
    ```bash
    git clone https://github.com/1haut/Filmanalyse.git
    ```
-3. Install packages
+4. Install packages
    ```bash
    pip install numpy pandas os json requests python-dotenv
    ```
