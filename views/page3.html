@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styleStyle.css" />
+  </head>
+  <body>
+    <h1 style="color: #ae6378">Orchard</h1>
+    <div class="container">
+      <form id="form-button-1" method="get">
+        <button class="btn btn1" formaction="/mint">
+          <span class="option">Mint</span>
+        </button>
+        <button class="btn btn2" formaction="/orchard">
+          <span class="option">Orchard</span>
+        </button>
+        <button class="btn btn3 active" formaction="/interface">
+          <span class="option">Interface</span>
+        </button>
+        <button class="btn btn4" formaction="/thunderstorm">
+          <span class="option">Thunderstorm</span>
+        </button>
+        <button class="btn btn5" formaction="/characterized">
+          <span class="option">Characterized</span>
+        </button>
+        <button class="btn btn6" formaction="/incompatibility">
+          <span class="option">Incompatibility</span>
+        </button>
+      </form>
+    </div>
+    <div class="dropdown">
+      <form id="dropdown-btn-1" method="get">
+        <button class="dropbtn">Dropdown</button>
+        <ul class="dropdown-content">
+          <a href="/mint">
+            <li class="dropdown-item">Mint</li>
+          </a>
+          <a href="/orchard">
+            <li class="dropdown-item">Orchard</li>
+          </a>
+          <a href="/interface">
+            <li class="dropdown-item">Interface</li>
+          </a>
+          <a href="/thunderstorm">
+            <li class="dropdown-item">Thunderstorm</li>
+          </a>
+          <a href="/characterized">
+            <li class="dropdown-item">Characterized</li>
+          </a>
+          <a href="/incompatibility">
+            <li class="dropdown-item">Incompatibility</li>
+          </a>
+        </ul>
+      </form>
+    </div>
+    <div class="page-title"></div>
+    <div class="charts">
+      <div class="chart chart1">
+        <div class="popover popover1">
+          <div class="popover-text see-boundary">
+            <p>
+              Key insights: Animation, adventure and family movies highest
+              return on interest. History, Western and Documentary lowest
+              average ROI.
+            </p>
+          </div>
+          <div class="chartInfo">
+            <h4>Return on interest (in percentage) by genre</h4>
+            <button class="btn popover-btn">Info</button>
+          </div>
+        </div>
+        <canvas id="chart1" class="chart-canvas"></canvas>
+      </div>
+      <div class="chart chart2">
+        <div class="popover popover2">
+          <div class="popover-text see-boundary">
+            <p>
+              Key insight: Budget rises consistently year over year until year
+              2000. Revenue more volatile (could by affected by outliers) but
+              raises over time until year 2020.
+            </p>
+          </div>
+          <div class="chartInfo">
+            <h4>Average budget by genre (in USD)</h4>
+            <button class="btn popover-btn">Info</button>
+          </div>
+        </div>
+        <canvas id="chart2" class="chart-canvas"></canvas>
+      </div>
+      <div class="chart chart3">
+        <div class="popover popover3">
+          <div class="popover-text see-boundary">
+            <p>
+              Strong growth after the year 2000. Maybe people got over the
+              existential dread of Y2K by making a bunch of movies about it?
+            </p>
+          </div>
+          <button class="btn popover-btn">Info</button>
+        </div>
+        <canvas id="chart3" class="chart-canvas"></canvas>
+      </div>
+      <div class="chart chart4">
+        <div class="popover popover4">
+          <div class="popover-text see-boundary">
+            <p>
+              Pissing you pants after a horror movie out of sheer fright might
+              sour the mood, I think.
+            </p>
+          </div>
+          <button class="btn popover-btn">Info</button>
+        </div>
+        <canvas id="chart4" class="chart-canvas"></canvas>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+
+    <script>
+      // Register ChartDataLabel plugin
+      // Chart.register(ChartDataLabels);
+      // Define font for charts
+      Chart.defaults.font.family = "'Outfit', sans-serif";
+
+      const colorWheel = [
+        "#003a7d",
+        "#008dff",
+        "#ff73b6",
+        "#c701ff",
+        "#4ecb8d",
+        "#ff9d3a",
+        "#f9e858",
+        "#d83034",
+      ];
+      const infoButtons = document.querySelectorAll(".popover-btn");
+      const infoBoxes = document.querySelectorAll(".popover-text");
+
+      for (let i = 0; i < infoButtons.length; i++) {
+        infoButtons[i].addEventListener("mouseenter", () => {
+          infoBoxes[i].style.display = "block";
+        });
+
+        infoButtons[i].addEventListener("mouseleave", () => {
+          infoBoxes[i].style.display = "none";
+        });
+      }
+
+      const charts = document.querySelectorAll(".chart");
+
+      const canvas1 = document.getElementById("chart1");
+      const canvas2 = document.getElementById("chart2");
+      const canvas3 = document.getElementById("chart3");
+      const canvas4 = document.getElementById("chart4");
+
+      async function loadCSV(path) {
+        const response = await fetch(path);
+        const text = await response.text();
+
+        const rows = text.trim().split("\n");
+
+        const headerRow = rows.shift();
+
+        const titles = headerRow.replace(/"/g, "").split(",").slice(1);
+
+        const labels = [];
+        const data = [];
+
+        rows.forEach((row) => {
+          // const values = row.replace(/"/g, "").split(",");
+          // const [xValue, yValue] = [values[0], values[1]];
+
+          const [label, ...values] = row.replace(/"/g, "").split(",");
+          labels.push(label);
+
+          values.forEach((val, i) => {
+            data[i] = [...(data[i] ?? []), Number(val)];
+          });
+        });
+
+        return [labels, data, titles];
+      }
+
+      async function drawCharts() {
+        const [labels1, data1, titles1] = await loadCSV(
+          "data/average_runtime_year.csv"
+        );
+        const [labels2, data2, titles2] = await loadCSV("data/bud_rev_min.csv");
+        // const [labels3, data3, titles3] = await loadCSV(
+        //   "data/common_combos.csv"
+        // );
+
+        try {
+          const ctx1 = new Chart(canvas1, {
+            type: "line",
+            data: {
+              labels: labels1,
+              datasets: [
+                {
+                  label: titles1[0],
+                  data: data1[0],
+                  fill: true,
+                  borderColor: "#0099de",
+                  tension: 0.1,
+                },
+              ],
+            },
+            options: {
+              aspectRatio: 0.8,
+              scales: {
+                x: {
+                  ticks: {
+                    callback: function (val, index) {
+                      return index % 3 === 2 ? this.getLabelForValue(val) : "";
+                    },
+                  },
+                },
+                y: {
+                  min: 40,
+                },
+              },
+            },
+          });
+        } catch (err) {
+          return;
+        }
+
+        try {
+          const ctx2 = new Chart(canvas2, {
+            type: "line",
+            data: {
+              labels: labels2,
+              datasets: [
+                {
+                  label: titles2[0],
+                  data: data2[0],
+                  fill: false,
+                  borderColor: colorWheel[0],
+                  tension: 0.1,
+                },
+                {
+                  label: titles2[1],
+                  data: data2[1],
+                  fill: false,
+                  borderColor: colorWheel[1],
+                  tension: 0.1,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+            },
+          });
+        } catch (err) {
+          return;
+        }
+
+        try {
+          const ctx3 = new Chart(canvas3, {
+            type: "bar",
+            data: {
+              labels: labels3,
+              datasets: [
+                {
+                  label: titles3,
+                  data: data3,
+                  borderWidth: 0,
+                  backgroundColor: "#0099de",
+                  borderColor: "#6fd2ff",
+                },
+              ],
+            },
+            options: {
+              scales: {
+                y: {},
+              },
+              aspectRatio: 1,
+            },
+          });
+        } catch (err) {
+          return;
+        }
+
+        try {
+          const ctx4 = new Chart(canvas4, cfg);
+        } catch (err) {
+          return;
+        }
+      }
+
+      function checkChartsOnCanvases() {
+        const canvasIds = ["chart1", "chart2", "chart3", "chart4"];
+        canvasIds.forEach((id, index) => {
+          const canvas = document.getElementById(id);
+          const canvasDisplay = Chart.getChart(canvas);
+          console.log(`Id: ${index}, ${Boolean(canvasDisplay)}`);
+          if (!canvasDisplay) {
+            charts[index].hidden = true;
+            infoButtons[index].hidden = true;
+          }
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        await drawCharts();
+        checkChartsOnCanvases();
+      });
+    </script>
+  </body>
+</html>
