@@ -17,29 +17,26 @@ url_countries = "https://api.themoviedb.org/3/configuration/countries?language=e
 url_languages = "https://api.themoviedb.org/3/configuration/languages"
 url_genres = "https://api.themoviedb.org/3/genre/movie/list?language=en"
 
-countries_tmdb = requests.get(url_countries, headers=headers).json()
-languages_tmdb = requests.get(url_languages, headers=headers).json()
-genres_tmdb = requests.get(url_genres, headers=headers).json()
-
-
-# Transform data from TMDB
-transformed_countries = []
-for element in countries_tmdb:
-    transformed_countries.append({  "abbreviation": f"{element["iso_3166_1"]}" ,
+def transform(tmdb_url):
+    transformed = []
+    tmdb_data = requests.get(tmdb_url, headers=headers).json()
+    for element in tmdb_data:
+        # Countries
+        if "countries" in tmdb_url:
+            transformed.append({  "abbreviation": f"{element["iso_3166_1"]}" ,
                                     "name": f"{element["english_name"]}"})
+            
+            
+        if "languages" in tmdb_url:
+            transformed.append({  "abbreviation": f"{element["iso_3166_1"]}" ,
+                                    "name": f"{element["english_name"]}"})
+        
+        if "genre" in tmdb_url:
+            transformed.append({"genre": f"{element["name"]}"})
+        
+    return transformed
     
-transformed_languages = []
-for element in languages_tmdb:
-    transformed_languages.append({  "abbreviation": f"{element["iso_639_1"]}" ,
-                                    "english_name": f"{element["english_name"]}",
-                                    "native_name": f"{element["name"]}"})
-
-transformed_genres = []
-for element in genres_tmdb:
-    transformed_genres.append({"genre": f"{element["name"]}"})
-    
-
-# Convert transformed lists to csv 
-pd.DataFrame(transformed_countries).to_csv('countries.csv', index=False)
-pd.DataFrame(transformed_languages).to_csv('languages.csv', index=False)
-pd.DataFrame(transformed_genres).to_csv('genres.csv', index=False)
+for url in [url_countries, url_languages, url_genres]:
+    data = transform(url)
+    file_name = f"{url_countries=}".split('=')[0].split("_")[1] + ".csv"
+    pd.DataFrame(data).to_csv(file_name, index=False)
