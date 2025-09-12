@@ -19,24 +19,27 @@ url_genres = "https://api.themoviedb.org/3/genre/movie/list?language=en"
 
 def transform(tmdb_url):
     transformed = []
+    table_name  = ""
     tmdb_data = requests.get(tmdb_url, headers=headers).json()
     for element in tmdb_data:
         # Countries
         if "countries" in tmdb_url:
             transformed.append({  "abbreviation": f"{element["iso_3166_1"]}" ,
                                     "name": f"{element["english_name"]}"})
+            table_name = "countries"
             
         # Languages
-        if "languages" in tmdb_url:
+        if tmdb_url.endswith("languages"):
             transformed.append({  "abbreviation": f"{element["iso_3166_1"]}" ,
                                     "name": f"{element["english_name"]}"})
-        
+            table_name = "languages"
+        # Genres
         if "genre" in tmdb_url:
             transformed.append({"genre": f"{element["name"]}"})
+            table_name = "genres"
         
-    return transformed
+    return transformed, table_name
     
 for url in [url_countries, url_languages, url_genres]:
-    data = transform(url)
-    file_name = f"{url_countries=}".split('=')[0].split("_")[1] + ".csv"
-    pd.DataFrame(data).to_csv(file_name, index=False)
+    data, file_name = transform(url)
+    pd.DataFrame(data).to_csv(file_name + ".csv", index=False)
