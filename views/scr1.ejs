@@ -80,7 +80,7 @@
         const [labels3, data3, title3] = await loadCSV("data/movies_years.csv");
 
         try {
-          const ctx1 = new Chart(canvas1, {
+          const ctx1 = new Chart(canvases[0], {
             type: "bar",
             data: {
               labels: labels1,
@@ -105,7 +105,7 @@
         }
 
         try {
-          const ctx2 = new Chart(canvas2, {
+          const ctx2 = new Chart(canvases[1], {
             type: "bar",
             data: {
               labels: labels2,
@@ -136,7 +136,7 @@
         }
 
         try {
-          const ctx3 = new Chart(canvas3, {
+          const ctx3 = new Chart(canvases[2], {
             type: "bar",
             data: {
               labels: labels3,
@@ -165,17 +165,15 @@
         }
 
         try {
-          const ctx4 = new Chart(canvas4, cfg);
+          const ctx4 = new Chart(canvases[3], cfg);
         } catch (error) {
           return;
         }
       }
 
       function checkChartsOnCanvases() {
-        const canvasIds = ["chart1", "chart2", "chart3", "chart4"];
-        canvasIds.forEach((id, index) => {
-          const canvas = document.getElementById(id);
-          const canvasDisplay = Chart.getChart(canvas);
+        canvases.forEach((id, index) => {
+          const canvasDisplay = Chart.getChart(canvases[index]);
           if (!canvasDisplay) {
             charts[index].hidden = true;
             infoButtons[index].hidden = true;

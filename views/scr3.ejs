@@ -40,11 +40,7 @@
       }
 
       const charts = document.querySelectorAll(".chart");
-
-      const canvas1 = document.getElementById("chart1");
-      const canvas2 = document.getElementById("chart2");
-      const canvas3 = document.getElementById("chart3");
-      const canvas4 = document.getElementById("chart4");
+      const canvases = document.querySelectorAll(".chart-canvas")
 
       async function loadCSV(path) {
         const response = await fetch(path);
@@ -76,7 +72,7 @@
         const [labels2, data2, titles2] = await loadCSV("data/bud_rev.csv");
 
         try {
-          const ctx1 = new Chart(canvas1, {
+          const ctx1 = new Chart(canvases[0], {
             type: "bar",
             data: {
               labels: labels1,
@@ -107,7 +103,7 @@
         }
 
         try {
-          const ctx2 = new Chart(canvas2, {
+          const ctx2 = new Chart(canvases[1], {
             type: "line",
             data: {
               labels: labels2,
@@ -137,29 +133,28 @@
         }
 
         try {
-          const ctx3 = new Chart(canvas3, cfg4);
+          const ctx3 = new Chart(canvases[2], cfg4);
         } catch (err) {
           return;
         }
 
         try {
-          const ctx4 = new Chart(canvas4, cfg4);
+          const ctx4 = new Chart(canvases[3], cfg4);
         } catch (err) {
           return;
         }
       }
 
       function checkChartsOnCanvases() {
-        const canvasIds = ["chart1", "chart2", "chart3", "chart4"];
-        canvasIds.forEach((id, index) => {
-          const canvas = document.getElementById(id);
-          const canvasDisplay = Chart.getChart(canvas);
+        canvases.forEach((id, index) => {
+          const canvasDisplay = Chart.getChart(canvases[index]);
           if (!canvasDisplay) {
             charts[index].hidden = true;
             infoButtons[index].hidden = true;
           }
         });
       }
+
 
       document.addEventListener("DOMContentLoaded", async () => {
         await drawCharts();

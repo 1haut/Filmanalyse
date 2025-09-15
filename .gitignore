@@ -333,3 +333,5 @@ test.js
 test.html
 combine*.html
 /data
+public/js/chartConfigs.js
+public/js/slide

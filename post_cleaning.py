@@ -178,7 +178,3 @@ pd_music_composer_ref = pd.DataFrame(music_composers_rows)
 pd_photo_director_ref = pd.DataFrame(photo_directors_rows)
 pd_genre_name = pd.DataFrame(movie_genre_name)
 pd_country_name = pd.DataFrame(movie_country_name)
-
-
-# time_sec = time.time() - start
-# print(f"Time: {round(time_sec // 60)} min {time_sec % 60:.3f} sec")

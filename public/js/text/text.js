@@ -11,7 +11,7 @@ export const text = [
       "Average rating by genre",
       "Movies made per year",
     ],
-    paths: [],
+    path: "slide1.js",
   },
   {
     headline: "Genres",

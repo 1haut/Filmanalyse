@@ -6,7 +6,6 @@ import { text } from "./public/js/text/text.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-// const __views = __dirname + "/views/";
 
 const app = express();
 const port = 12141;
