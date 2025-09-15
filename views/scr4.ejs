@@ -110,57 +110,13 @@
         }
 
         try {
-          const ctx2 = new Chart(canvas2, {
-            type: "line",
-            data: {
-              labels: labels2,
-              datasets: [
-                {
-                  label: titles2[0],
-                  data: data2[0],
-                  fill: false,
-                  borderColor: colorWheel[0],
-                  tension: 0.1,
-                },
-                {
-                  label: titles2[1],
-                  data: data2[1],
-                  fill: false,
-                  borderColor: colorWheel[1],
-                  tension: 0.1,
-                },
-              ],
-            },
-            options: {
-              responsive: true,
-            },
-          });
+          const ctx2 = new Chart(canvas2, cfg);
         } catch (err) {
           return;
         }
 
         try {
-          const ctx3 = new Chart(canvas3, {
-            type: "bar",
-            data: {
-              labels: labels3,
-              datasets: [
-                {
-                  label: titles3,
-                  data: data3,
-                  borderWidth: 0,
-                  backgroundColor: "#0099de",
-                  borderColor: "#6fd2ff",
-                },
-              ],
-            },
-            options: {
-              scales: {
-                y: {},
-              },
-              aspectRatio: 1,
-            },
-          });
+          const ctx3 = new Chart(canvas3, cfg);
         } catch (err) {
           return;
         }
@@ -177,7 +133,6 @@
         canvasIds.forEach((id, index) => {
           const canvas = document.getElementById(id);
           const canvasDisplay = Chart.getChart(canvas);
-          console.log(`Id: ${index}, ${Boolean(canvasDisplay)}`);
           if (!canvasDisplay) {
             charts[index].hidden = true;
             infoButtons[index].hidden = true;

@@ -167,7 +167,6 @@
         canvasIds.forEach((id, index) => {
           const canvas = document.getElementById(id);
           const canvasDisplay = Chart.getChart(canvas);
-          console.log(`Id: ${index}, ${Boolean(canvasDisplay)}`);
           if (!canvasDisplay) {
             charts[index].hidden = true;
             infoButtons[index].hidden = true;
