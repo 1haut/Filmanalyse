@@ -2,44 +2,66 @@ import express from "express";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import path from "node:path";
+import { text } from "./public/utils/text.js";
+// import { infoData } from "./public/utils/cfg.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const __views = __dirname + "/views/";
+// const __views = __dirname + "/views/";
 
 const app = express();
-const port = 3456;
+const port = 12141;
 
 app.use(express.static(path.join(__dirname, "/public")));
+
+app.set("view engine", "ejs");
 
 app.set("views", "./views");
 
 app.get("/", (req, res) => {
-  res.redirect("/mint");
+  res.redirect("/basic");
 });
 
-app.get("/mint", (req, res) => {
-  res.sendFile(__views + "page1.html");
+app.get("/basic", (req, res) => {
+  const data = text[0];
+  res.render("scr1", {
+    data: data,
+  });
 });
 
-app.get("/orchard", (req, res) => {
-  res.sendFile(__views + "page2.html");
+app.get("/genre", (req, res) => {
+  const data = text[1];
+  res.render("scr2", {
+    data: data,
+  });
 });
 
-app.get("/interface", (req, res) => {
-  res.sendFile(__views + "page3.html");
+app.get("/box-office", (req, res) => {
+  const data = text[2];
+  res.render("scr3", {
+    data: data,
+  });
 });
 
-app.get("/thunderstorm", (req, res) => {
-  res.sendFile(__views + "page4.html");
+app.get("/misc", (req, res) => {
+  const data = text[3];
+  res.render("scr4", {
+    data: data,
+  });
 });
 
-app.get("/characterized", (req, res) => {
-  res.sendFile(__views + "page5.html");
+app.get("/trends", (req, res) => {
+  const data = text[4];
+  res.render("scr5", {
+    data: data,
+  });
 });
 
-app.get("/incompatibility", (req, res) => {
-  res.sendFile(__views + "page6.html");
+app.get("/recent", (req, res) => {
+  const data = text[5];
+  res.render("scr6", {
+    data: data,
+  });
 });
 
 app.listen(port, () => {

@@ -1,0 +1,200 @@
+<%- include('partials/header.ejs') %>
+<%- include('partials/body.ejs', data) %>
+
+    <script>
+      // Register ChartDataLabel plugin
+      // Chart.register(ChartDataLabels);
+      Chart.defaults.font.family = "'Outfit', sans-serif";
+
+      const colorWheel = [
+        "#003a7d",
+        "#008dff",
+        "#ff73b6",
+        "#c701ff",
+        "#4ecb8d",
+        "#ff9d3a",
+        "#f9e858",
+        "#d83034",
+      ];
+      const infoButtons = document.querySelectorAll(".popover-btn");
+      const infoBoxes = document.querySelectorAll(".popover-text");
+
+      for (let i = 0; i < infoButtons.length; i++) {
+        infoButtons[i].addEventListener("mouseenter", () => {
+          infoBoxes[i].style.display = "block";
+        });
+
+        infoButtons[i].addEventListener("mouseleave", () => {
+          infoBoxes[i].style.display = "none";
+        });
+      }
+
+      const charts = document.querySelectorAll(".chart");
+
+      const canvas1 = document.getElementById("chart1");
+      const canvas2 = document.getElementById("chart2");
+      const canvas3 = document.getElementById("chart3");
+      const canvas4 = document.getElementById("chart4");
+
+      async function loadCSV(path) {
+        const response = await fetch(path);
+        const text = await response.text();
+
+        const rows = text.trim().split("\n");
+
+        const headerRow = rows.shift();
+
+        const titles = headerRow.replace(/"/g, "").split(",").slice(1);
+
+        const labels = [];
+        const data = [];
+
+        rows.forEach((row) => {
+          // const values = row.replace(/"/g, "").split(",");
+          // const [xValue, yValue] = [values[0], values[1]];
+
+          const [label, ...values] = row.replace(/"/g, "").split(",");
+          labels.push(label);
+
+          values.forEach((val, i) => {
+            data[i] = [...(data[i] ?? []), Number(val)];
+          });
+        });
+
+        return [labels, data, titles];
+      }
+
+      async function drawCharts() {
+        const [labels1, data1, titles1] = await loadCSV(
+          "data/rating_revenue.csv"
+        );
+        const [labels2, data2, titles2] = await loadCSV(
+          "data/budget_genre.csv"
+        );
+        // const [labels3, data3, titles3] = await loadCSV(
+        //   "data/common_combos.csv"
+        // );
+        try {
+          const ctx1 = new Chart(canvas1, {
+            type: "line",
+            data: {
+              labels: labels1,
+              datasets: [
+                {
+                  label: titles1[0],
+                  data: data1[0],
+                  fill: true,
+                  borderColor: "#0099de",
+                  tension: 0.1,
+                },
+              ],
+            },
+            options: {
+              aspectRatio: 1.5,
+              scales: {
+                x: {
+                  ticks: {
+                    display: true,
+                  },
+                },
+                y: {
+                  beginAtZero: true,
+                  callback: function (val, index) {
+                    return `$ ${this.getLabelForValue(val)}`;
+                  },
+                },
+              },
+            },
+          });
+        } catch (err) {
+          return;
+        }
+
+        try {
+          const ctx2 = new Chart(canvas2, {
+            type: "bar",
+            data: {
+              labels: labels2,
+              datasets: [
+                {
+                  label: titles2[0],
+                  data: data2[0],
+                  borderWidth: 0,
+                  backgroundColor: "#0099de",
+                  borderColor: "#6fd2ff",
+                },
+              ],
+            },
+            options: {
+              scales: {
+                x: {
+                  ticks: {
+                    autoSkip: false,
+                  },
+                },
+                y: {
+                  display: true,
+                  beginAtZero: true,
+                  type: "logarithmic",
+                },
+              },
+              aspectRatio: 0.75,
+            },
+          });
+        } catch (err) {
+          return;
+        }
+
+        try {
+          const ctx3 = new Chart(canvas3, {
+            type: "bar",
+            data: {
+              labels: labels3,
+              datasets: [
+                {
+                  label: titles3[0],
+                  data: data3[0],
+                  borderWidth: 0,
+                  backgroundColor: "#0099de",
+                  borderColor: "#6fd2ff",
+                },
+              ],
+            },
+            options: {
+              scales: {
+                y: {},
+              },
+              aspectRatio: 1,
+            },
+          });
+        } catch (err) {
+          return;
+        }
+
+        try {
+          const ctx4 = new Chart(canvas4, cfg);
+        } catch (err) {
+          return;
+        }
+      }
+
+      function checkChartsOnCanvases() {
+        const canvasIds = ["chart1", "chart2", "chart3", "chart4"];
+        canvasIds.forEach((id, index) => {
+          const canvas = document.getElementById(id);
+          const canvasDisplay = Chart.getChart(canvas);
+          console.log(`Id: ${index}, ${Boolean(canvasDisplay)}`);
+          if (!canvasDisplay) {
+            charts[index].hidden = true;
+            infoButtons[index].hidden = true;
+          }
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        await drawCharts();
+        checkChartsOnCanvases();
+      });
+    </script>
+  </body>
+</html>

@@ -333,5 +333,3 @@ test.js
 test.html
 combine*.html
 /data
-*.ejs
-main-ejs.js
