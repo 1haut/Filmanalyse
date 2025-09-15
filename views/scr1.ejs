@@ -40,11 +40,6 @@
       const charts = document.querySelectorAll(".chart");
       const canvases = document.querySelectorAll(".chart-canvas")
 
-      const canvas1 = document.getElementById("chart1");
-      const canvas2 = document.getElementById("chart2");
-      const canvas3 = document.getElementById("chart3");
-      const canvas4 = document.getElementById("chart4");
-
       async function loadCSV(path) {
         const response = await fetch(path);
         const text = await response.text();
