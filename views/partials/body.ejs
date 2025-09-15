@@ -1,28 +1,30 @@
   <body>
-  <h1 style="color: #429e9d"><%= data.headline %></h1>
-    <div class="container">
-      <form id="form-button-1" method="get">
-        <button class="btn btn1 active" formaction="/basic">
-          <span class="option">basic</span>
+    <header>
+      <h1 style="color: #429e9d"><%= data.headline %></h1>
+    </header>
+    <nav class="container">
+      <form id="nav-button-1" method="get">
+        <button class="btn btn1 option" formaction="/basic">
+          basic
         </button>
-        <button class="btn btn2" formaction="/genre">
-          <span class="option">genre</span>
+        <button class="btn btn2 option" formaction="/genre">
+          genre
         </button>
-        <button class="btn btn3" formaction="/misc">
-          <span class="option">misc</span>
+        <button class="btn btn3 option" formaction="/misc">
+          misc
         </button>
-        <button class="btn btn4" formaction="/box-office">
-          <span class="option">box-office</span>
+        <button class="btn btn4 option" formaction="/box-office">
+          box-office
         </button>
-        <button class="btn btn5" formaction="/trends">
-          <span class="option">trends</span>
+        <button class="btn btn5 option" formaction="/trends">
+          trends
         </button>
-        <button class="btn btn6" formaction="/recent">
-          <span class="option">recent</span>
+        <button class="btn btn6 option" formaction="/recent">
+          recent
         </button>
       </form>
-    </div>
-    <div class="dropdown">
+    </nav>
+    <section class="dropdown">
       <form id="dropdown-btn-1" method="get">
         <button class="dropbtn">Dropdown</button>
         <ul class="dropdown-content">
@@ -46,64 +48,49 @@
           </a>
         </ul>
       </form>
-    </div>
-    <div class="charts">
+    </section>
+    <section class="charts">
       <div class="chart chart1">
-        <div class="popover popover1">
-          <div class="popover-text ">
-            <p>
-              <%= data.comments[0] %>
-            </p>
-          </div>
-          <div class="chartInfo">
+        <hgroup class="popover popover1">
+          <p class="popover-text"><%= data.comments[0] %></p>
+          <header class="chartInfo">
             <h4><%= data.titles[0] %></h4>
             <button class="btn popover-btn">Info</button>
-          </div>
-        </div>
+          </header>
+        </hgroup>
         <canvas id="chart1" class="chart-canvas"></canvas>
       </div>
       <div class="chart chart2">
-        <div class="popover popover2">
-          <div class="popover-text ">
-            <p>
-              <%= data.comments[1] %>
-            </p>
-          </div>
-          <div class="chartInfo">
+        <hgroup class="popover popover2">
+          <p class="popover-text"><%= data.comments[1] %></p>
+          <header class="chartInfo">
             <h4><%= data.titles[1] %></h4>
             <button class="btn popover-btn">Info</button>
-          </div>
-        </div>
+          </header>
+        </hgroup>
         <canvas id="chart2" class="chart-canvas"></canvas>
       </div>
       <div class="chart chart3">
-        <div class="popover popover3">
-          <div class="popover-text ">
-            <p>
-              <%= data.comments[2] %>
-            </p>
-          </div>
-          <div class="chartInfo">
+        <hgroup class="popover popover3">
+          <p class="popover-text"><%= data.comments[2] %></p>
+          <header class="chartInfo">
             <h4><%= data.titles[2] %></h4>
             <button class="btn popover-btn">Info</button>
-          </div>
-        </div>
+          </header>
+        </hgroup>
         <canvas id="chart3" class="chart-canvas"></canvas>
       </div>
       <div class="chart chart4">
-        <div class="popover popover4">
-          <div class="popover-text ">
-            <p>
-              <%= data.comments[3] %>
-            </p>
-          </div>
-          <div class="chartInfo">
+        <hgroup class="popover popover4">
+          <p class="popover-text"><%= data.comments[3] %></p>
+          <header class="chartInfo">
             <h4><%= data.titles[3] %></h4>
             <button class="btn popover-btn">Info</button>
-          </div>
-        </div>
+          </header>
+        </hgroup>
         <canvas id="chart4" class="chart-canvas"></canvas>
       </div>
-    </div>
+    </section>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>

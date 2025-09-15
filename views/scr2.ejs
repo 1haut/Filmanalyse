@@ -18,6 +18,14 @@
       const infoButtons = document.querySelectorAll(".popover-btn");
       const infoBoxes = document.querySelectorAll(".popover-text");
 
+      const navBtns = document.querySelectorAll("#nav-button-1 .btn");
+      
+      navBtns.forEach((btn, index) => {
+        if (index === 1) {
+          btn.classList.add("active");
+        }
+      });
+
       for (let i = 0; i < infoButtons.length; i++) {
         infoButtons[i].addEventListener("mouseenter", () => {
           infoBoxes[i].style.display = "block";
@@ -28,16 +36,9 @@
         });
       }
 
-      function addActive() {
-        const btns = document.querySelectorAll(".btn");
-        btns.forEach((btn, index) => {
-          if (index === 1) {
-            btn.classList.add("active");
-          }
-        });
-      }
+      
 
-      addActive();
+      
 
       const charts = document.querySelectorAll(".chart");
 
@@ -60,9 +61,6 @@
         const data = [];
 
         rows.forEach((row) => {
-          // const values = row.replace(/"/g, "").split(",");
-          // const [xValue, yValue] = [values[0], values[1]];
-
           const [label, ...values] = row.replace(/"/g, "").split(",");
           labels.push(label);
 

@@ -19,6 +19,14 @@
       const infoButtons = document.querySelectorAll(".popover-btn");
       const infoBoxes = document.querySelectorAll(".popover-text");
 
+      const navBtns = document.querySelectorAll("#nav-button-1 .btn");
+      
+      navBtns.forEach((btn, index) => {
+        if (index === 0) {
+          btn.classList.add("active");
+        }
+      });
+
       for (let i = 0; i < infoButtons.length; i++) {
         infoButtons[i].addEventListener("mouseenter", () => {
           infoBoxes[i].style.display = "block";
@@ -30,6 +38,7 @@
       }
 
       const charts = document.querySelectorAll(".chart");
+      const canvases = document.querySelectorAll(".chart-canvas")
 
       const canvas1 = document.getElementById("chart1");
       const canvas2 = document.getElementById("chart2");
