@@ -50,47 +50,18 @@
       </form>
     </section>
     <section class="charts">
-      <div class="chart chart1">
-        <hgroup class="popover popover1">
-          <p class="popover-text"><%= data.comments[0] %></p>
+    <% for (let i = 0; i < 4; i++) { %>
+      <div class="chart chart<%= i + 1 %>">
+        <hgroup class="popover popover<%= i + 1 %>">
+          <p class="popover-text"><%= data.comments[i] %></p>
           <header class="chartInfo">
-            <h4><%= data.titles[0] %></h4>
+            <h4><%= data.titles[i] %></h4>
             <button class="btn popover-btn">Info</button>
           </header>
         </hgroup>
-        <canvas id="chart1" class="chart-canvas"></canvas>
+        <canvas id="chart<%= i + 1 %>" class="chart-canvas"></canvas>
       </div>
-      <div class="chart chart2">
-        <hgroup class="popover popover2">
-          <p class="popover-text"><%= data.comments[1] %></p>
-          <header class="chartInfo">
-            <h4><%= data.titles[1] %></h4>
-            <button class="btn popover-btn">Info</button>
-          </header>
-        </hgroup>
-        <canvas id="chart2" class="chart-canvas"></canvas>
-      </div>
-      <div class="chart chart3">
-        <hgroup class="popover popover3">
-          <p class="popover-text"><%= data.comments[2] %></p>
-          <header class="chartInfo">
-            <h4><%= data.titles[2] %></h4>
-            <button class="btn popover-btn">Info</button>
-          </header>
-        </hgroup>
-        <canvas id="chart3" class="chart-canvas"></canvas>
-      </div>
-      <div class="chart chart4">
-        <hgroup class="popover popover4">
-          <p class="popover-text"><%= data.comments[3] %></p>
-          <header class="chartInfo">
-            <h4><%= data.titles[3] %></h4>
-            <button class="btn popover-btn">Info</button>
-          </header>
-        </hgroup>
-        <canvas id="chart4" class="chart-canvas"></canvas>
-      </div>
+    <% } %>
     </section>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
