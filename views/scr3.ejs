@@ -70,6 +70,7 @@
       async function drawCharts() {
         const [labels1, data1, titles1] = await loadCSV("data/genre_roi.csv");
         const [labels2, data2, titles2] = await loadCSV("data/bud_rev.csv");
+        const [labels3, data3, titles3] = await loadCSV("data/decade_genre_pivot_punc.csv");
 
         try {
           const ctx1 = new Chart(canvases[0], {
@@ -133,7 +134,23 @@
         }
 
         try {
-          const ctx3 = new Chart(canvases[2], cfg4);
+          const ctx3 = new Chart(canvases[2], {
+            type: 'line',
+            data: {
+              labels: labels3,
+              datasets: 
+                data3[0].forEach((row, index) => ({
+                  label: titles3[index],
+                  data: data3[index],
+                  fill: false,
+                  borderColor: colorWheel[index % 8],
+                  tension: 0.1
+                }))
+            },
+            options: {
+              responsive: true
+            }
+          });
         } catch (err) {
           return;
         }
@@ -163,3 +180,4 @@
     </script>
   </body>
 </html>
+

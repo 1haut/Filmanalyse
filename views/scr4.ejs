@@ -75,10 +75,22 @@
         const [labels1, data1, titles1] = await loadCSV(
           "data/average_runtime_year.csv"
         );
-        // const [labels2, data2, titles2] = await loadCSV("data/bud_rev_min.csv");
+        const [labels2, data2, titles2] = await loadCSV("data/genre_budget_roi.csv");
         // const [labels3, data3, titles3] = await loadCSV(
         //   "data/common_combos.csv"
         // );
+
+        const result = data2[0].map((row, index) => ({ x: data2[1][index], y: row }))
+        const msd = data2[0].map((row, index) => ({
+          label: labels2[index],
+          data: [{
+            x: data2[1][index],
+            y: row
+          }],
+          backgroundColor: colorWheel[index % 8]
+        }))
+
+        console.log(msd)
 
         try {
           const ctx1 = new Chart(canvases[0], {
@@ -89,7 +101,7 @@
                 {
                   label: titles1[0],
                   data: data1[0],
-                  fill: true,
+                  fill: false,
                   borderColor: "#0099de",
                   tension: 0.1,
                 },
@@ -116,9 +128,22 @@
         }
 
         try {
-          const ctx2 = new Chart(canvases[1], cfg);
+          const ctx2 = new Chart(canvases[1], {
+            type: 'scatter',
+            data: {
+              datasets: msd
+            },
+            options: {
+              scales: {
+                x: {
+                  type: 'linear',
+                  position: 'bottom'
+                }
+              }
+            }
+          });
         } catch (err) {
-          return;
+          console.error(err);
         }
 
         try {

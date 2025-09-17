@@ -11,7 +11,6 @@ export const text = [
       "Average rating by genre",
       "Movies made per year",
     ],
-    path: "slide1.js",
   },
   {
     headline: "Genres",
@@ -41,8 +40,9 @@ export const text = [
     headline: "Miscellaneous",
     comments: [
       "Key insights: Runtime of average movies steady increase until year 1960. Flat average runtimes after.",
+      "Key insight: Horror movies are budget friendly while bringing in reasonable profits, History movies does not seem to have favorable budget/roi relationship",
     ],
-    titles: ["Feature movie average runtime (mins)"],
+    titles: ["Feature movie average runtime (mins)", "Budget/roi rate"],
   },
   {
     headline: "Trends",

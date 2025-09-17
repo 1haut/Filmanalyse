@@ -3,6 +3,7 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import path from "node:path";
 import { text } from "./public/js/text/text.js";
+import { loadCSV } from "./public/utils/utilities.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
