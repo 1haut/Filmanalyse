@@ -335,3 +335,5 @@ combine*.html
 /data
 public/js/chartConfigs.js
 public/js/slide
+/res-files
+views/view.ejs

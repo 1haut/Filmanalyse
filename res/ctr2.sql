@@ -1,1 +1,0 @@
-create table public.movie_genre_name (movie_id integer not null, genre_name text) 
