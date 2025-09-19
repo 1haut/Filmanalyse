@@ -28,7 +28,7 @@ const chartConfigObj = {
 
 function setConfigs(type, csv) {
   const [labels, values, titles] = csv;
-  const config = chartConfigObj[type];
+  const config = structuredClone(chartConfigObj[type]);
   switch (type) {
     case "scatter":
       const xValues = values[0];
@@ -48,16 +48,28 @@ function setConfigs(type, csv) {
     case "pie":
     case "doughnut":
       config.data.labels = labels;
+      const defaultValues = config.data.datasets[0];
       values.forEach((row, index) => {
-        config.data.datasets[index].label = titles[index];
-        config.data.datasets[index].data = row;
+        config.data.datasets[index + 1] = defaultValues;
+        config.data.datasets[index + 1].label = titles[index];
+        config.data.datasets[index + 1].data = row;
       });
+      config.data.datasets.shift();
       break;
     default:
-      throw Error("No chart generated");
+      throw Error("No chart generated! \nType: " + type);
   }
 
   return config;
+}
+
+function configsAllCharts(chartData) {
+  return chartData.titles.map((el, i) => {
+    const resData = loadCSV("public/" + chartData.paths[i]);
+    const chartConfigs = setConfigs(chartData.chartTypes[i], resData);
+
+    return chartConfigs;
+  });
 }
 
 app.get("/", (req, res) => {
@@ -65,47 +77,77 @@ app.get("/", (req, res) => {
 });
 
 app.get("/basic", (req, res) => {
-  const data = text[0];
-  res.render("scr1", {
-    data: data,
+  const chartData = text[0];
+
+  const arrayChartConfigs = configsAllCharts(chartData);
+
+  res.render("view", {
+    data: chartData,
+    config: arrayChartConfigs,
+    slideIndex: chartData.slideNum - 1,
   });
 });
 
 app.get("/genre", (req, res) => {
-  const data = text[1];
-  res.render("scr2", {
-    data: data,
+  const chartData = text[1];
+
+  const arrayChartConfigs = configsAllCharts(chartData);
+
+  res.render("view", {
+    data: chartData,
+    config: arrayChartConfigs,
+    slideIndex: chartData.slideNum - 1,
   });
 });
 
 app.get("/box-office", (req, res) => {
-  const data = text[2];
-  res.render("scr3", {
-    data: data,
+  const chartData = text[2];
+
+  const arrayChartConfigs = configsAllCharts(chartData);
+
+  res.render("view", {
+    data: chartData,
+    config: arrayChartConfigs,
+    slideIndex: chartData.slideNum - 1,
   });
 });
 
 app.get("/misc", (req, res) => {
-  const data = text[3];
-  res.render("scr4", {
-    data: data,
+  const chartData = text[3];
+
+  const arrayChartConfigs = configsAllCharts(chartData);
+
+  res.render("view", {
+    data: chartData,
+    config: arrayChartConfigs,
+    slideIndex: chartData.slideNum - 1,
   });
 });
 
 app.get("/trends", (req, res) => {
-  const data = text[4];
-  res.render("scr5", {
-    data: data,
+  const chartData = text[4];
+
+  const arrayChartConfigs = configsAllCharts(chartData);
+
+  res.render("view", {
+    data: chartData,
+    config: arrayChartConfigs,
+    slideIndex: chartData.slideNum - 1,
   });
 });
 
 app.get("/recent", (req, res) => {
-  const data = text[5];
-  res.render("scr6", {
-    data: data,
+  const chartData = text[5];
+
+  const arrayChartConfigs = configsAllCharts(chartData);
+
+  res.render("view", {
+    data: chartData,
+    config: arrayChartConfigs,
+    slideIndex: chartData.slideNum - 1,
   });
 });
 
-// app.listen(port, () => {
-//   console.log(`Server listening at http://localhost:${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${port}`);
+});

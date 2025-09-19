@@ -337,3 +337,5 @@ public/js/chartConfigs.js
 public/js/slide
 /res-files
 views/view.ejs
+alt.js
+views/slide*.ejs

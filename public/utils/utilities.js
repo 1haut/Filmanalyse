@@ -1,9 +1,6 @@
 import { readFileSync } from "node:fs";
 
-export async function loadCSV(path) {
-  // const response = await fetch(path);
-  // const text = await response.text();
-
+export function loadCSV(path) {
   const text = readFileSync(path, { encoding: "utf-8" });
 
   const rows = text.trim().split("\n");
@@ -29,7 +26,7 @@ export async function loadCSV(path) {
 
 export const colorWheel = [
   "#003a7d",
-  "#008dff",
+  "#0099de",
   "#ff73b6",
   "#c701ff",
   "#4ecb8d",
@@ -37,10 +34,9 @@ export const colorWheel = [
   "#f9e858",
   "#d83034",
   "#8c8c8c",
-  "#000000",
   "#7b5e7b",
   "#ffb3ff",
-  "#aaffc3",
+  "#4bc0c0ff",
   "#ffffb3",
   "#ff6666",
   "#808080",

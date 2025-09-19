@@ -3,7 +3,7 @@ export const text = [
     headline: "Basic",
     slideNum: 1,
     comments: [
-      "Key insights: Given the number of films, there seems to be low budget movies.",
+      "Key insights: Given the number of films, there seems to be low budget movies amongst the many movies made by the filmmakers featured.",
       "Key insights: No genre averages over 6.8 or lower than 5.2 (meaning generally low variance), there are preferences (Documentary, Music, Animation) and disinclinations (chiefly Horror).",
       "Key insights: Strong growth after the year 2000, with an average of around 10% growth YOY until 2020 (pandemic year). Given the size of the dataset (500K+ movies), can signify rise inindependant/low-budget filmmaking.",
     ],
@@ -17,6 +17,7 @@ export const text = [
       "data/rating_per_genre.csv",
       "data/movies_years.csv",
     ],
+    chartTypes: ["bar", "bar", "bar"],
   },
   {
     headline: "Genres",
@@ -36,6 +37,7 @@ export const text = [
       "data/movies_one_genre_per_genre.csv",
       "data/common_combos.csv",
     ],
+    chartTypes: ["pie", "pie", "bar"],
   },
   {
     headline: "Box office",
@@ -53,6 +55,7 @@ export const text = [
       "data/bud_rev.csv",
       "data/decade_genre_pivot_punc.csv",
     ],
+    chartTypes: ["bar", "line", "line"],
   },
   {
     headline: "Miscellaneous",
@@ -63,6 +66,7 @@ export const text = [
     ],
     titles: ["Feature movie average runtime (mins)", "Budget/roi rate"],
     paths: ["data/average_runtime_year.csv", "data/genre_budget_roi.csv"],
+    chartTypes: ["line", "scatter"],
   },
   {
     headline: "Trends",
@@ -73,6 +77,7 @@ export const text = [
     ],
     titles: ["Average revenue by movie rating", "Average budget per genre"],
     paths: ["data/rating_revenue.csv", "data/budget_genre.csv"],
+    chartTypes: ["line", "bar"],
   },
   {
     headline: "Recency",
@@ -80,6 +85,6 @@ export const text = [
     comments: ["Key insight: Strong presense of dramas and comedies."],
     titles: ["Most popular recent (2020 and after) non-documentary movies"],
     paths: ["data/recent_movies_popular_genres.csv"],
-    configs: [],
+    chartTypes: ["doughnut"],
   },
 ];
