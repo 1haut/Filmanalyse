@@ -52,7 +52,7 @@ export const text = [
     ],
     paths: [
       "data/genre_roi.csv",
-      "data/bud_rev.csv",
+      "data/bud_rev2.csv",
       "data/decade_genre_pivot_punc.csv",
     ],
     chartTypes: ["bar", "line", "line"],

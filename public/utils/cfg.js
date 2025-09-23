@@ -29,10 +29,9 @@ export const lineChart = {
     labels: [],
     datasets: [
       {
-        label: "Default",
-        data: [],
+        label: "My First Dataset",
         fill: false,
-        borderColor: "#4bc0c0ff",
+        borderColor: colorWheel,
         tension: 0.1,
       },
     ],
@@ -60,22 +59,7 @@ export const pieChart = {
 export const scatterChart = {
   type: "scatter",
   data: {
-    datasets: [
-      {
-        label: "",
-        data: [
-          {
-            x: 0,
-            y: 0,
-          },
-          {
-            x: 0,
-            y: 0,
-          },
-        ],
-        backgroundColor: "#20a924ff",
-      },
-    ],
+    datasets: [],
   },
   options: {
     scales: {

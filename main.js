@@ -34,7 +34,7 @@ function setConfigs(type, csv) {
       const xValues = values[0];
       const yValues = values[1];
       config.data.datasets = xValues.map((value, index) => ({
-        labels: labels[index],
+        label: labels[index],
         data: [
           {
             x: xValues[index],
@@ -48,11 +48,11 @@ function setConfigs(type, csv) {
     case "pie":
     case "doughnut":
       config.data.labels = labels;
-      const defaultValues = config.data.datasets[0];
       values.forEach((row, index) => {
-        config.data.datasets[index + 1] = defaultValues;
-        config.data.datasets[index + 1].label = titles[index];
-        config.data.datasets[index + 1].data = row;
+        const newData = JSON.parse(JSON.stringify(config.data.datasets[0]));
+        newData.label = titles[index];
+        newData.data = row;
+        config.data.datasets[index + 1] = newData;
       });
       config.data.datasets.shift();
       break;
