@@ -1,0 +1,44 @@
+<body>
+  <header>
+    <h1><%= data.headline %></h1>
+  </header>
+  <nav class="container">
+    <form id="nav-button-1" method="get">
+      <% for (let i = 0; i < pageHeadlines.length; i++) { %>
+      <button
+        class="btn btn<%= i + 1 %> option"
+        formaction="/<%=toKebabCase(pageHeadlines[i])%>"
+      >
+        <%=pageHeadlines[i]%>
+      </button>
+      <% } %>
+    </form>
+  </nav>
+  <section class="dropdown">
+    <form id="dropdown-btn-1" method="get">
+      <button class="dropbtn">Dropdown</button>
+      <ul class="dropdown-content">
+        <% for (let i = 0; i < pageHeadlines.length; i++) { %>
+        <a href="/<%=toKebabCase(pageHeadlines[i])%>">
+          <li class="dropdown-item"><%=pageHeadlines[i]%></li>
+        </a>
+        <% } %>
+      </ul>
+    </form>
+  </section>
+  <section class="charts">
+    <% for (let i = 0; i < 4; i++) { %>
+    <div class="chart chart<%= i + 1 %>">
+      <hgroup class="popover popover<%= i + 1 %>">
+        <p class="popover-text"><%= data.comments[i] %></p>
+        <header class="chartInfo">
+          <h4><%= data.titles[i] %></h4>
+          <button class="btn popover-btn">Info</button>
+        </header>
+      </hgroup>
+      <canvas id="chart<%= i + 1 %>" class="chart-canvas"></canvas>
+    </div>
+    <% } %>
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>

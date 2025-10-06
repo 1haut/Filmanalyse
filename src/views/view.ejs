@@ -1,0 +1,60 @@
+<%- include('partials/header.ejs') %>
+<%- include('partials/body.ejs', {data, toKebabCase}) %>
+<script>
+  Chart.defaults.font.family = "'Outfit', sans-serif";
+
+  const infoButtons = document.querySelectorAll(".popover-btn");
+  const infoBoxes = document.querySelectorAll(".popover-text");
+  const navBtns = document.querySelectorAll("#nav-button-1 .btn");
+
+  const charts = document.querySelectorAll(".chart");
+  const canvases = document.querySelectorAll(".chart-canvas");
+  const slideIndex = <%- JSON.stringify(slideIndex) %>
+  const chartConfigs = <%- JSON.stringify(config) %>
+
+  // Highlight current page
+  navBtns.forEach((btn, index) => {
+    if (index === slideIndex) {
+      btn.classList.add("active");
+    }
+  });
+
+  // Show chart information on information button hover
+  for (let i = 0; i < infoButtons.length; i++) {
+    infoButtons[i].addEventListener("mouseenter", () => {
+      infoBoxes[i].style.display = "block";
+    });
+
+    infoButtons[i].addEventListener("mouseleave", () => {
+      infoBoxes[i].style.display = "none";
+    });
+  }
+
+  async function drawCharts(canvas, config) {
+    const ctx = canvas.getContext("2d");
+    try {
+      new Chart(ctx, config);
+    } catch (error) {
+      console.error("Error creating chart:", error);
+    }
+  }
+
+  function checkChartsOnCanvases() {
+    canvases.forEach((element, index) => {
+      const canvasDisplay = Chart.getChart(element);
+      if (!canvasDisplay) {
+        charts[index].hidden = true;
+        infoButtons[index].hidden = true;
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    for (let [index, config] of chartConfigs.entries()){
+      await drawCharts(canvases[index], config)
+    }
+    checkChartsOnCanvases();
+  });
+</script>
+</body>
+</html>

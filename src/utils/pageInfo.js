@@ -1,4 +1,4 @@
-export const text = [
+export const pageInfo = [
   {
     headline: "Basic",
     slideNum: 1,
@@ -13,9 +13,9 @@ export const text = [
       "Movies made per year",
     ],
     paths: [
-      "data/top10_most_prod_director.csv",
-      "data/rating_per_genre.csv",
-      "data/movies_years.csv",
+      "top10_most_prod_director.csv",
+      "rating_per_genre.csv",
+      "movies_years.csv",
     ],
     chartTypes: ["bar", "bar", "bar"],
   },
@@ -33,15 +33,15 @@ export const text = [
       "Most common movie combinations",
     ],
     paths: [
-      "data/num_movies.csv",
-      "data/movies_one_genre_per_genre.csv",
-      "data/common_combos.csv",
+      "num_movies.csv",
+      "movies_one_genre_per_genre.csv",
+      "common_combos.csv",
     ],
     chartTypes: ["pie", "pie", "bar"],
   },
   {
-    headline: "Box office",
-    slideNum: 3,
+    headline: "Box Office",
+    slideNum: 4,
     comments: [
       "Key insights: Animation, adventure and family movies highest return on interest. History, Western and Documentary lowest average ROI.",
       "Key insight: Budget rises consistently year over year until year 2000. Revenue more volatile (could by affected by outliers) but raises over time on average until year 2020.",
@@ -50,22 +50,18 @@ export const text = [
       "Average budget by genre (in USD)",
       "Average return on interest by genre",
     ],
-    paths: [
-      "data/genre_roi.csv",
-      "data/bud_rev2.csv",
-      "data/decade_genre_pivot_punc.csv",
-    ],
+    paths: ["genre_roi.csv", "bud_rev2.csv", "decade_genre_pivot_punc.csv"],
     chartTypes: ["bar", "line", "line"],
   },
   {
     headline: "Miscellaneous",
-    slideNum: 4,
+    slideNum: 3,
     comments: [
       "Key insights: Runtime of average movies steady increase until year 1960. Flat average runtimes after.",
       "Key insight: Horror movies are budget friendly while bringing in reasonable profits, History movies does not seem to have favorable budget/roi relationship",
     ],
     titles: ["Feature movie average runtime (mins)", "Budget/roi rate"],
-    paths: ["data/average_runtime_year.csv", "data/genre_budget_roi.csv"],
+    paths: ["average_runtime_year.csv", "genre_budget_roi.csv"],
     chartTypes: ["line", "scatter"],
   },
   {
@@ -76,7 +72,7 @@ export const text = [
       "Documentaries are by far the cheapest genre, adventure movies are more expensive",
     ],
     titles: ["Average revenue by movie rating", "Average budget per genre"],
-    paths: ["data/rating_revenue.csv", "data/budget_genre.csv"],
+    paths: ["rating_revenue.csv", "budget_genre.csv"],
     chartTypes: ["line", "bar"],
   },
   {
@@ -84,7 +80,7 @@ export const text = [
     slideNum: 6,
     comments: ["Key insight: Strong presense of dramas and comedies."],
     titles: ["Most popular recent (2020 and after) non-documentary movies"],
-    paths: ["data/recent_movies_popular_genres.csv"],
+    paths: ["recent_movies_popular_genres.csv"],
     chartTypes: ["doughnut"],
   },
 ];
